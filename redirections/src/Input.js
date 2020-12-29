@@ -24,23 +24,31 @@ class Inputs extends Component {
     event.preventDefault()
     const enteredUrls = this.state.value
     const splitEachUrl = enteredUrls.split("\n");
-    const urlRegex = /(\s+)|(\%)|(\[)|(\{)|(\])|(\})|(\,)/;
+    const urlRegex = /(\s+)|(\%)|(\[)|(\{)|(\])|(\})|(\,)|(\')|(\~)|(\#)|(\$)|(\_)/;
 
     const newUrls = []
     const wrongUrls = []
 
     // 
     for (let i = 0; i < splitEachUrl.length; i++) {
-      if (/(^\/)/.test(splitEachUrl[i])) {
-        if (urlRegex.test(splitEachUrl[i])) {
-          newUrls.push('"' + splitEachUrl[i] + '"')
+      let splitAfterComma = splitEachUrl[i].split(",/");
+      if (/(^\/)/.test(splitAfterComma[0])) {
+        if (urlRegex.test(splitAfterComma[0])) {
+          newUrls.push('"' + splitAfterComma[0] + '",/' + splitAfterComma[1])
         } else {
           newUrls.push(splitEachUrl[i])
         }
-      } else {
-        this.setState({ urlError: true })
-        wrongUrls.push(splitEachUrl[i])
       }
+      // if (/(^\/)/.test(splitEachUrl[i])) {
+      //   if (urlRegex.test(splitEachUrl[i])) {
+      //     newUrls.push('"' + splitEachUrl[i] + '"')
+      //   } else {
+      //     newUrls.push(splitEachUrl[i])
+      //   }
+      // } else {
+      //   this.setState({ urlError: true })
+      //   wrongUrls.push(splitEachUrl[i])
+      // }
     }
 
     // If there're wrong urls
