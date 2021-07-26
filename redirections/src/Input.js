@@ -24,7 +24,7 @@ class Inputs extends Component {
     event.preventDefault()
     const enteredUrls = this.state.value
     const splitEachUrl = enteredUrls.split("\n");
-    const urlRegex = /(\s+)|(\%)|(\[)|(\{)|(\])|(\})|(\,)|(\')|(\~)|(\#)|(\$)|(\_)/;
+    const urlRegex = /(\s+)|(\%)|(\[)|(\{)|(\])|(\})|(\,)|(\')|(\~)|(\#)|(\$)|(\_)|(\:)|(\|)/;
 
     const newUrls = []
     const wrongUrls = []
